@@ -2,7 +2,6 @@
 //  g++ chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
-// TODO Bishop needs to not be able to end up in a non diagnal postion
 
 #include <iostream>
 #include <string>
@@ -167,7 +166,14 @@ public:
         return false;
       }
     }
-    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    // Checks if the bishope is moveing diagnal by subtracting the end postion from the start 
+    // and checking both x and y difrances are equal.
+    if (abs(start.x - end.x) != abs(start.y - end.y))
+    {
+      std::cout << "Invalid Bishop move" << endl;
+      return false;
+    }
+    else if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
     {
       std::cout << "Invalid Bishop move, team piece in the way" << endl;
       return false;
@@ -326,7 +332,7 @@ void PrintBoard()
         std::cout << "| " << Board[x][y]->letter << " ";
       }
     }
-    std::cout << "| " << y+1;
+    std::cout << "| " << y + 1;
     std::cout << endl;
 
     for (int j = 0; j <= 32; j++)
