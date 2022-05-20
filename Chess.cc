@@ -2,6 +2,7 @@
 //  g++ chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
+// TODO Knights can kill own team -- at least blue can....
 
 #include <iostream>
 #include <string>
