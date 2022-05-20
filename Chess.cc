@@ -294,6 +294,7 @@ void BoardReset()
 // Prints out the board and all of its peice placement
 void PrintBoard()
 {
+  std::cout << "  A   B   C   D   E   F   G   H  " << endl;
   for (int i = 0; i <= 32; i++)
   {
     std::cout << "-";
@@ -325,7 +326,7 @@ void PrintBoard()
         std::cout << "| " << Board[x][y]->letter << " ";
       }
     }
-    std::cout << "|";
+    std::cout << "| " << y+1;
     std::cout << endl;
 
     for (int j = 0; j <= 32; j++)
