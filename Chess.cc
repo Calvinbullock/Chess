@@ -1,4 +1,5 @@
 /* Project Started March 2022 */
+//  g++ chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
 // TODO Bishop needs to not be able to end up in a non diagnal postion
