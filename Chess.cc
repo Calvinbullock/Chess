@@ -341,6 +341,8 @@ void PrintBoard()
     }
   }
   std::cout << endl;
+  std::cout << "  A   B   C   D   E   F   G   H  " << endl;
+  std::cout << endl;
 }
 
 /*checks for legal movments*/
