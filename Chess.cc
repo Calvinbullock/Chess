@@ -2,6 +2,7 @@
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
+// TODO king Needs to count danger spots as invalid moves. --- This will be a pain.
 
 #include <iostream>
 #include <string>
@@ -429,7 +430,7 @@ void Turn()
   Movement(start, end);
 }
 
-#if 1 // FOR the
+#if 1 // FOR DEBUG purposes
 int main()
 {
   BoardReset();
