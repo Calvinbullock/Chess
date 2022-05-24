@@ -49,7 +49,7 @@ public:
     }
     else
     {
-      // might need to subtract a 1 from here to match the array 0.
+      // Might need to subtract a 1 from here to match the array 0.
       y = atoi(positionIn + 1) - 1;
 
       // DEBUG << x << ", " << y << endl;
@@ -70,6 +70,8 @@ public:
   {
     color = colourIn;
     letter = letterIn;
+    // This uses bash termanial colour change to display the colours.
+    // If you are running a diffrent Terminal program it may not display correct. __WARNING__
     if (colourIn == "white")
     {
       printPiece = "\033[34;1;4m" + letterIn + "\033[0m";
@@ -79,7 +81,7 @@ public:
 
   virtual bool ValidMove(Position start, Position end)
   {
-    return false; // Might need to be false
+    return false;
   }
 };
 
@@ -175,7 +177,7 @@ public:
         return false;
       }
     }
-    // Checks if the bishop is moveing diagnal by subtracting the end postion from the start
+    // Checks if the bishop is moveing diagnal by subtracting the end postion from the start.
     // and checking both x and y difrances are equal.
     if (abs(start.x - end.x) != abs(start.y - end.y))
     {
@@ -300,7 +302,7 @@ void BoardReset()
   {
     // Board[x][1] = new Pawn("white");
     Board[x][6] = new Pawn("black");
-    Board[x][2] = new Pawn("black"); // easy test line
+    Board[x][2] = new Pawn("black"); // For easy move testing TODO REMOVE when ready
   }
 
   Board[0][0] = new Rook("white");
@@ -322,7 +324,7 @@ void BoardReset()
   Board[7][7] = new Rook("black");
 }
 
-// Prints out the board and all of its peice placement
+// Prints out the board and all of it's peice placement
 void PrintBoard()
 {
   std::cout << "  A   B   C   D   E   F   G   H  " << endl;
@@ -389,7 +391,7 @@ void Movement(Position start, Position end)
   return;
 }
 
-// Takes imput from the payer and parses it for other methods
+// Takes input from the payer and parses it for other methods
 void Turn()
 {
   PrintBoard();
