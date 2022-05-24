@@ -1,9 +1,9 @@
 /* Project Started March 2022 */
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
-// TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
+// TODO Pawns can't kill yet basic or En passant
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
-// TODO QUeen needs move set
+// TODO Queen needs move set
 // TODO BLue team moves don't work properly
 // TODO uncoment purple pawn set up and remove the extra blue pawns
 
@@ -254,26 +254,35 @@ public:
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
     }
-    else if (Board[end.x][end.y]->letter != " ")
+    // En passant
+    else if ((Board[start.x][start.y + 1]->letter != " ") && (Board[end.x][end.y]->letter == " "))
+    {
+      DEBUG << "En passant" << endl;
+      return true;
+    }
+    else if ((Board[end.x][end.y]->letter != " "))
     {
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
     }
-    else if ((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) || (Board[start.x - 1][start.y + 1]))
+    // kill move
+    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) || (Board[start.x - 1][start.y + 1])) && (Board[end.x][end.y]->letter != " "))
     {
-      // kill step
+      DEBUG;
       firstMove = false;
       return true;
     }
+    // All good can move forward
     else if ((Board[end.x][end.y] == Board[start.x][start.y + 1]))
     {
-      // All good can move forward
+      DEBUG;
       firstMove = false;
       return true;
     }
+    // move forward twice on first move
     else if (firstMove && (Board[end.x][end.y] == Board[start.x][start.y + 2]))
     {
-      // move forward twice on first move
+      DEBUG;
       firstMove = false;
       return true;
     }
@@ -300,9 +309,9 @@ void BoardReset()
 
   for (int x = 0; x < 8; x++)
   {
-    // Board[x][1] = new Pawn("white");
+    Board[x][1] = new Pawn("white"); // coment out when testing
     Board[x][6] = new Pawn("black");
-    Board[x][2] = new Pawn("black"); // For easy move testing TODO REMOVE when ready
+    Board[3][3] = new Pawn("black"); // For easy move testing TODO REMOVE when ready
   }
 
   Board[0][0] = new Rook("white");
