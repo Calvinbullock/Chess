@@ -257,7 +257,6 @@ public:
     // En passant // TODO needs to remove dead peice
     else if ((Board[start.x][start.y + 1]->letter != " ") && (Board[end.x][end.y]->letter == " "))
     {
-      DEBUG << "En passant" << endl;
       return true;
     }
     // kill move
@@ -265,7 +264,6 @@ public:
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
              (Board[end.x][end.y]->letter != " "))
     {
-      DEBUG;
       firstMove = false;
       return true;
     }
@@ -277,14 +275,12 @@ public:
     // All good can move forward
     else if ((Board[end.x][end.y] == Board[start.x][start.y + 1]))
     {
-      DEBUG;
       firstMove = false;
       return true;
     }
     // move forward twice on first move
     else if (firstMove && (Board[end.x][end.y] == Board[start.x][start.y + 2]))
     {
-      DEBUG;
       firstMove = false;
       return true;
     }
