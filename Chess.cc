@@ -209,6 +209,22 @@ class King : public Piece
 public:
   King() {}
   King(string colourIn) : Piece("G", colourIn) {}
+
+  bool ValidMove(Position start, Position end) override
+  {
+    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    {
+      std::cout << "Invalid King move, team kill." << endl;
+      return false;
+    }
+    else if ((abs(end.x - start.x) <= 1) && (abs(start.y - end.y) <= 1))
+    {
+      DEBUG << abs(end.x - start.x) << ", " << abs(start.y - end.y) << endl;
+      return true;
+    }
+    std::cout << "Invalid King move." << endl;
+    return false;
+  }
 };
 
 class Queen : public Piece
