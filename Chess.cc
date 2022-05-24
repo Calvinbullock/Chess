@@ -2,7 +2,6 @@
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
-// TODO Knights can kill own team -- at least blue can....
 
 #include <iostream>
 #include <string>
@@ -172,7 +171,7 @@ public:
         return false;
       }
     }
-    // Checks if the bishope is moveing diagnal by subtracting the end postion from the start
+    // Checks if the bishop is moveing diagnal by subtracting the end postion from the start
     // and checking both x and y difrances are equal.
     if (abs(start.x - end.x) != abs(start.y - end.y))
     {
