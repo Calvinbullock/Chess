@@ -1,7 +1,7 @@
 /* Project Started March 2022 */
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
-// TODO Pawns can't kill yet basic or En passant
+// TODO Pawns can't kill yet basic dosent work at all or En passant - Dosent remove dead piece.
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 // TODO Queen needs move set
 // TODO BLue team moves don't work properly
@@ -254,23 +254,25 @@ public:
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
     }
-    // En passant
+    // En passant // TODO needs to remove dead peice
     else if ((Board[start.x][start.y + 1]->letter != " ") && (Board[end.x][end.y]->letter == " "))
     {
       DEBUG << "En passant" << endl;
+      return true;
+    }
+    // kill move
+    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) ||
+              (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
+             (Board[end.x][end.y]->letter != " "))
+    {
+      DEBUG;
+      firstMove = false;
       return true;
     }
     else if ((Board[end.x][end.y]->letter != " "))
     {
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
-    }
-    // kill move
-    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) || (Board[start.x - 1][start.y + 1])) && (Board[end.x][end.y]->letter != " "))
-    {
-      DEBUG;
-      firstMove = false;
-      return true;
     }
     // All good can move forward
     else if ((Board[end.x][end.y] == Board[start.x][start.y + 1]))
