@@ -2,7 +2,10 @@
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
-// TODO king Needs to count danger spots as invalid moves. --- This will be a pain.
+// TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
+// TODO QUeen needs move set
+// TODO BLue team moves don't work properly
+// TODO uncoment purple pawn set up and remove the extra blue pawns
 
 #include <iostream>
 #include <string>
