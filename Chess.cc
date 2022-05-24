@@ -1,5 +1,5 @@
 /* Project Started March 2022 */
-//  g++ chess.cc && ./a.out --- use this to run it in Bash
+// g++ Chess.cc && ./a.out --- use this to run it in Bash
 
 // TODO Pawns can antpasond even if there is no piece in the way -- FIX IT
 // TODO Knights can kill own team -- at least blue can....
@@ -136,10 +136,15 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    if (((end.x == start.x + 2) && (end.y == start.y - 1)) || ((end.x == start.x + 2) && (end.y == start.y + 1)) ||
-        ((end.x == start.x - 2) && (end.y == start.y + 1)) || ((end.x == start.x - 2) && (end.y == start.y - 1)) ||
-        ((end.x == start.x - 1) && (end.y == start.y + 2)) || ((end.x == start.x + 1) && (end.y == start.y + 2)) ||
-        ((end.x == start.x - 1) && (end.y == start.y - 2)) || ((end.x == start.x + 1) && (end.y == start.y - 2)))
+    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    {
+      std::cout << "Invalid Knight move, team kill." << endl;
+      return false;
+    }
+    else if (((end.x == start.x + 2) && (end.y == start.y - 1)) || ((end.x == start.x + 2) && (end.y == start.y + 1)) ||
+             ((end.x == start.x - 2) && (end.y == start.y + 1)) || ((end.x == start.x - 2) && (end.y == start.y - 1)) ||
+             ((end.x == start.x - 1) && (end.y == start.y + 2)) || ((end.x == start.x + 1) && (end.y == start.y + 2)) ||
+             ((end.x == start.x - 1) && (end.y == start.y - 2)) || ((end.x == start.x + 1) && (end.y == start.y - 2)))
     {
       return true;
     }
@@ -167,7 +172,7 @@ public:
         return false;
       }
     }
-    // Checks if the bishope is moveing diagnal by subtracting the end postion from the start 
+    // Checks if the bishope is moveing diagnal by subtracting the end postion from the start
     // and checking both x and y difrances are equal.
     if (abs(start.x - end.x) != abs(start.y - end.y))
     {
