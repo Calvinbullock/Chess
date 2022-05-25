@@ -246,7 +246,7 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color)) // HERE -- Null check
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
