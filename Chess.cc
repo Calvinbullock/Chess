@@ -176,6 +176,7 @@ public:
         return false;
       }
     }
+    
     // Checks if the bishop is moveing diagnal by subtracting the end postion from the start.
     // and checking both x and y difrances are equal.
     if (abs(start.x - end.x) != abs(start.y - end.y))
@@ -228,6 +229,7 @@ public:
     std::cout << "Invalid King move." << endl;
     return false;
   }
+  
 };
 
 class Queen : public Piece
@@ -235,6 +237,16 @@ class Queen : public Piece
 public:
   Queen() {}
   Queen(string colourIn) : Piece("Q", colourIn) {}
+
+  bool ValidMove(Position start, Position end) override
+  {
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
+    {
+      cout << "Invalid Queen move, team piece in path." << endl;
+      return false;
+    }
+    return true;
+  }
 };
 
 class Pawn : public Piece
