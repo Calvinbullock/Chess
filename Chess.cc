@@ -2,12 +2,12 @@
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
 // **FOR LATER**
-// TODO uncoment purple pawn set up and remove the extra blue pawns
 // TODO BLue team moves don't work properly
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
 // TODO Make turn() function
+// blue pawns kill team on first move -- I think because of ""En Passant""" kill
 
 #include <iostream>
 #include <string>
@@ -289,7 +289,7 @@ public:
         }
       }
     }
-    // If all Ifs fail the move is valid
+    // If all ifs fail the move is valid
     return true;
   }
 };
@@ -308,7 +308,7 @@ public:
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
     }
-    // En passant // TODO needs to remove dead peice
+    // En passant move
     else if ((Board[start.x][start.y + 1] != nullptr) && (Board[end.x][end.y] == nullptr))
     {
       DEBUG;
@@ -518,7 +518,7 @@ int main()
   {
 
     Turn();
-    // TODO the 3 lines in coments AKA GAME OVER?
+    // TODO the 3 lines of comments below AKA GAME OVER?
     // have it check for two Gs (kings), to see if the game is over ****TO DO
     // std::cout << "If game over, enter 1." << endl;
     // std::cin >> winner; // ****TODO put this back
