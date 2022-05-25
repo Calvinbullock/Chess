@@ -1,13 +1,14 @@
 /* Project Started March 2022 */
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
 
-// TODO Pawns can't kill yet basic dosent work at all or En passant - Dosent remove dead piece.
-// TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
-// TODO Queen needs move set
-// TODO BLue team moves don't work properly
+// **LESS IMPORTANT**
 // TODO uncoment purple pawn set up and remove the extra blue pawns
+// TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
+// TODO BLue team moves don't work properly
 
-// IMPORTANT TODO fix all == " " != "" if statments and turn them to nullptr
+// **FOCES ON THESE**
+// TODO Rook can jump people, pawns can jump people
+// TODO Queen needs move set
 
 #include <iostream>
 #include <string>
