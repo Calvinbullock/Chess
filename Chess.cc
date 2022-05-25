@@ -7,7 +7,7 @@
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
-// putting in e3 then d3 will cause seg fault.... need to put in a catch for when an nulptr is the start postion -- user proof it
+// TODO Make turn() function
 
 #include <iostream>
 #include <string>
@@ -495,7 +495,17 @@ void Turn()
     break;
   }
   std::cout << endl;
-  Movement(start, end);
+
+  // This will stop people from useing a nullptr as the start postion.
+  if (Board[start.x][start.y] == nullptr)
+  {
+    std::cout << "starting point has no piece" << endl;
+    Turn();
+  }
+  else
+  {
+    Movement(start, end);
+  }
 }
 
 #if 1 // FOR DEBUG purposes
