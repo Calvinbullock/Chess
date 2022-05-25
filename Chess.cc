@@ -7,6 +7,8 @@
 // TODO BLue team moves don't work properly
 // TODO uncoment purple pawn set up and remove the extra blue pawns
 
+// IMPORTANT TODO fix all == " " != "" if statments and turn them to nullptr
+
 #include <iostream>
 #include <string>
 
@@ -257,6 +259,8 @@ public:
     // En passant // TODO needs to remove dead peice
     else if ((Board[start.x][start.y + 1]->letter != " ") && (Board[end.x][end.y]->letter == " "))
     {
+      Board[start.x][start.y + 1] = NULL; // = NULL creates SEG FAULT ---- VERY BAD -----
+      // Board[start.x][start.y + 1]->color = NULL; // = NULL creates SEG FAULT ---- VERY BAD -----
       return true;
     }
     // kill move
@@ -267,7 +271,7 @@ public:
       firstMove = false;
       return true;
     }
-    else if ((Board[end.x][end.y]->letter != " "))
+    else if ((Board[end.x][end.y] == nullptr))
     {
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
@@ -301,7 +305,7 @@ void BoardReset()
   {
     for (int x = 0; x < 8; x++)
     {
-      Board[x][y] = new Piece(" ", "empty");
+      Board[x][y] = nullptr;
     }
   }
 
@@ -348,22 +352,21 @@ void PrintBoard()
     // The loop below is for the columns
     for (int x = 0; x < 8; x++)
     {
-
-      if (Board[x][y]->color == "white")
+      if (Board[x][y] == nullptr)
+      {
+        std::cout << "|   ";
+      }
+      else if (Board[x][y]->color == "white")
       {
         std::cout << "| "
                   << "\033[35;1;4m" << Board[x][y]->letter << "\033[0m"
                   << " ";
       }
-      else if (Board[x][y]->color == "black")
+      else
       {
         std::cout << "| "
                   << "\033[34;1;4m" << Board[x][y]->letter << "\033[0m"
                   << " ";
-      }
-      else
-      {
-        std::cout << "| " << Board[x][y]->letter << " ";
       }
     }
     std::cout << "| " << y + 1;
