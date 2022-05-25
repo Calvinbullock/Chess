@@ -265,7 +265,6 @@ public:
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
              (Board[end.x][end.y] != nullptr))
     {
-      DEBUG;
       firstMove = false;
       return true;
     }
@@ -277,7 +276,6 @@ public:
     // All good can move forward
     else if (start.x == end.x && start.y+1 == end.y)
     {
-      DEBUG;
       firstMove = false;
       return true;
     }
@@ -410,7 +408,7 @@ void Turn()
   while (true)
   {
     char str[3];
-    std::cout << "Type the position for the starting place of your move:" << endl;
+    std::cout << "Type start postion of your move:" << endl;
     std::cin >> str;
     try
     {
@@ -427,7 +425,7 @@ void Turn()
   while (true)
   {
     char str[3];
-    std::cout << "Type the position for the ending place of your move:" << endl;
+    std::cout << "Type end postion of your move:" << endl;
     std::cin >> str;
     try
     {
