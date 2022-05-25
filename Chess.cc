@@ -100,9 +100,9 @@ public:
     {
       for (int x = min(start.x, end.x) + 1; x < max(start.x, end.x); x++)
       {
-        if ((Board[x][start.y] == nullptr))
+        if ((Board[x][start.y] != nullptr))
         {
-          cout << "Invalid Rook move, Piece in path." << endl;
+          cout << "Invalid Rook move, piece in path." << endl;
           return false;
         }
       }
@@ -111,9 +111,9 @@ public:
     {
       for (int y = min(start.y, end.y) + 1; y < max(start.y, end.y); y++)
       {
-        if ((Board[start.x][y] == nullptr))
+        if ((Board[start.x][y] != nullptr))
         {
-          cout << "Invalid Rook move, Piece in path." << endl;
+          cout << "Invalid Rook move, piece in path." << endl;
           return false;
         }
       }
@@ -197,7 +197,7 @@ public:
       if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Bishop move, piece in the way" << endl;
-        return true;
+        return false;
       }
     }
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
@@ -253,27 +253,31 @@ public:
       return false;
     }
     // En passant // TODO needs to remove dead peice
-    else if ((Board[start.x][start.y + 1] == nullptr) && (Board[end.x][end.y] == nullptr))
+    else if ((Board[start.x][start.y + 1] != nullptr) && (Board[end.x][end.y] == nullptr))
     {
+      DEBUG;
+      firstMove = false;
       Board[start.x][start.y + 1] = nullptr;
       return true;
     }
     // kill move
     else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) ||
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
-             (Board[end.x][end.y] == nullptr))
+             (Board[end.x][end.y] != nullptr))
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
-    else if ((Board[end.x][end.y] == nullptr))
+    else if ((Board[end.x][end.y] != nullptr))
     {
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
     }
     // All good can move forward
-    else if ((Board[end.x][end.y] == Board[start.x][start.y + 1]))
+    else if (start.x == end.x && start.y+1 == end.y)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
@@ -283,7 +287,7 @@ public:
       firstMove = false;
       return true;
     }
-    cout << "Invalid Pawn move, to far." << endl;
+    cout << "Invalid Pawn move." << endl;
     return false;
   }
 };
