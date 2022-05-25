@@ -245,7 +245,11 @@ public:
     // Checks if the Queen is moveing diagnal by subtracting the end postion from the start
     // and checking both x and y difrances are equal
     int y = start.y + 1;
-    if (abs(start.x - end.x) != abs(start.y - end.y) || start.x == end.x || end.y == start.y)
+    if (start.x == end.x || end.y == start.y)
+    {
+      // just here to skip the else if
+    }
+    else if (abs(start.x - end.x) != abs(start.y - end.y))
     {
       DEBUG;
       std::cout << "Invalid Queen move" << endl;
