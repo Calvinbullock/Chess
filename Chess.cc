@@ -101,7 +101,7 @@ public:
     {
       for (int x = min(start.x, end.x) + 1; x < max(start.x, end.x); x++)
       {
-        if ((Board[x][start.y]->letter != (" ")))
+        if ((Board[x][start.y] == nullptr))
         {
           cout << "Invalid Rook move, Piece in path." << endl;
           return false;
@@ -112,7 +112,7 @@ public:
     {
       for (int y = min(start.y, end.y) + 1; y < max(start.y, end.y); y++)
       {
-        if ((Board[start.x][y]->letter != (" ")))
+        if ((Board[start.x][y] == nullptr))
         {
           cout << "Invalid Rook move, Piece in path." << endl;
           return false;
@@ -125,7 +125,7 @@ public:
       return false;
     }
 
-    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Rook move, team piece in path." << endl;
       return false;
@@ -143,7 +143,7 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid Knight move, team kill." << endl;
       return false;
@@ -173,7 +173,7 @@ public:
     {
       y++;
       DEBUG << x << ", " << y << endl;
-      if (Board[x][y]->letter == " ")
+      if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Bishop move, piece in the way" << endl;
         return false;
@@ -186,7 +186,7 @@ public:
       std::cout << "Invalid Bishop move" << endl;
       return false;
     }
-    else if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    else if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid Bishop move, team piece in the way" << endl;
       return false;
@@ -197,13 +197,13 @@ public:
     {
       y++;
       DEBUG << x << ", " << y << endl;
-      if (Board[x][y]->letter == " ")
+      if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Bishop move, piece in the way" << endl;
         return true;
       }
     }
-    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid Bishop move, team piece in the way" << endl;
       return false;
@@ -220,7 +220,7 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    if (Board[start.x][start.y]->color == Board[end.x][end.y]->color)
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid King move, team kill." << endl;
       return false;
@@ -251,43 +251,50 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    if ((Board[start.x][start.y]->color == Board[end.x][end.y]->color))
+    DEBUG;
+    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color)) // HERE -- Null check
     {
+    DEBUG;
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
     }
     // En passant // TODO needs to remove dead peice
-    else if ((Board[start.x][start.y + 1]->letter != " ") && (Board[end.x][end.y]->letter == " "))
+    else if ((Board[start.x][start.y + 1] == nullptr) && (Board[end.x][end.y] == nullptr))
     {
-      Board[start.x][start.y + 1] = NULL; // = NULL creates SEG FAULT ---- VERY BAD -----
-      // Board[start.x][start.y + 1]->color = NULL; // = NULL creates SEG FAULT ---- VERY BAD -----
+    DEBUG;
+      Board[start.x][start.y + 1] = nullptr;
       return true;
     }
     // kill move
     else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) ||
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
-             (Board[end.x][end.y]->letter != " "))
+             (Board[end.x][end.y] == nullptr))
     {
+    DEBUG;
       firstMove = false;
       return true;
     }
     else if ((Board[end.x][end.y] == nullptr))
     {
+    DEBUG;
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
     }
     // All good can move forward
     else if ((Board[end.x][end.y] == Board[start.x][start.y + 1]))
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
     // move forward twice on first move
     else if (firstMove && (Board[end.x][end.y] == Board[start.x][start.y + 2]))
     {
+    DEBUG;
       firstMove = false;
       return true;
     }
+    DEBUG;
     cout << "Invalid Pawn move, to far." << endl;
     return false;
   }
@@ -385,12 +392,16 @@ void PrintBoard()
 /*checks for legal movments*/
 void Movement(Position start, Position end)
 {
+  DEBUG;
   if ((start.x != end.x) || (start.y != end.y))
   {
+    DEBUG;
     if (Board[start.x][start.y]->ValidMove(start, end))
     {
+      DEBUG;
       Board[end.x][end.y] = Board[start.x][start.y];
-      Board[start.x][start.y] = new Piece(" ", "");
+      Board[start.x][start.y] = nullptr;
+      DEBUG;
     }
   }
   else
