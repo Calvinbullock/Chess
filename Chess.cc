@@ -8,6 +8,7 @@
 
 // **FOCUS ON THESE**
 // TODO Queen needs move set
+// putting in e3 then d3 will cause seg fault.... need to put in a catch for when an nulptr is the start postion -- user proof it
 
 #include <iostream>
 #include <string>
@@ -176,7 +177,7 @@ public:
         return false;
       }
     }
-    
+
     // Checks if the bishop is moveing diagnal by subtracting the end postion from the start.
     // and checking both x and y difrances are equal.
     if (abs(start.x - end.x) != abs(start.y - end.y))
@@ -199,11 +200,6 @@ public:
         std::cout << "Invalid Bishop move, piece in the way" << endl;
         return false;
       }
-    }
-    if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
-    {
-      std::cout << "Invalid Bishop move, team piece in the way" << endl;
-      return false;
     }
     return true;
   }
@@ -229,7 +225,6 @@ public:
     std::cout << "Invalid King move." << endl;
     return false;
   }
-  
 };
 
 class Queen : public Piece
@@ -240,11 +235,58 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
+    // Turns of freindly fire
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Queen move, team piece in path." << endl;
       return false;
     }
+
+    // Checks if the Queen is moveing diagnal by subtracting the end postion from the start
+    // and checking both x and y difrances are equal
+    int y = start.y + 1;
+    if (abs(start.x - end.x) != abs(start.y - end.y) || start.x == end.x || end.y == start.y)
+    {
+      DEBUG;
+      std::cout << "Invalid Queen move" << endl;
+      return false;
+    }
+
+    y = start.y - 1;
+    for (int x = min(start.x, end.x) + 1; x < max(start.x, end.x); x++)
+    {
+      y++;
+      if (Board[x][y] == nullptr)
+      {
+        std::cout << "Invalid Queen move, piece in the way" << endl;
+        return false;
+      }
+    }
+
+    // straight row / column Queen movement
+    if (start.y == end.y)
+    {
+      for (int x = min(start.x, end.x) + 1; x < max(start.x, end.x); x++)
+      {
+        if ((Board[x][start.y] != nullptr)) // y check
+        {
+          cout << "Invalid Queen move, piece in path." << endl;
+          return false;
+        }
+      }
+    }
+    else if (start.x == end.x) // x check
+    {
+      for (int y = min(start.y, end.y) + 1; y < max(start.y, end.y); y++)
+      {
+        if ((Board[start.x][y] != nullptr))
+        {
+          cout << "Invalid Queen move, piece in path." << endl;
+          return false;
+        }
+      }
+    }
+    // If all Ifs fail the move is valid
     return true;
   }
 };
@@ -285,7 +327,7 @@ public:
       return false;
     }
     // All good can move forward
-    else if (start.x == end.x && start.y+1 == end.y)
+    else if (start.x == end.x && start.y + 1 == end.y)
     {
       firstMove = false;
       return true;
