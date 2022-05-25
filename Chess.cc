@@ -7,7 +7,6 @@
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
-// TODO Queen needs move set
 // putting in e3 then d3 will cause seg fault.... need to put in a catch for when an nulptr is the start postion -- user proof it
 
 #include <iostream>
