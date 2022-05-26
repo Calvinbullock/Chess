@@ -414,8 +414,7 @@ void BoardReset()
   Board[0][7] = new Rook("black");
   Board[1][7] = new Knight("black");
   Board[2][7] = new Bishop("black");
-  // Board[3][7] = new King("black");
-  Board[0][2] = new King("black"); // DEBUG KING
+  Board[3][7] = new King("black");
   Board[4][7] = new Queen("black");
   Board[5][7] = new Bishop("black");
   Board[6][7] = new Knight("black");
