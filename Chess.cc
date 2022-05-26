@@ -7,7 +7,6 @@
 
 // **FOCUS ON THESE**
 // TODO Make turn() function
-// blue pawns kill team on first move -- I think because of ""En Passant""" kill
 
 #include <iostream>
 #include <string>
@@ -234,7 +233,7 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    // Turns of freindly fire
+    // Turns off freindly fire
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Queen move, team piece in path." << endl;
@@ -250,7 +249,6 @@ public:
     }
     else if (abs(start.x - end.x) != abs(start.y - end.y))
     {
-      DEBUG;
       std::cout << "Invalid Queen move" << endl;
       return false;
     }
@@ -303,23 +301,42 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
+    // Gets the colour of the pawn and sets it to a boolean 
+    bool isWhite = Board[start.x][start.y]->color == "white";
+
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Pawn move, team piece in path." << endl;
       return false;
     }
-    // En passant move
-    else if ((Board[start.x][start.y + 1] != nullptr) && (Board[end.x][end.y] == nullptr))
+    // En passant move for white
+    else if ((Board[start.x][start.y + 1] != nullptr) && (Board[end.x][end.y] == nullptr) && isWhite)
     {
       DEBUG;
-      firstMove = false;
       Board[start.x][start.y + 1] = nullptr;
+      firstMove = false;
       return true;
     }
-    // kill move
+    // En passant move for black
+    else if ((Board[start.x][start.y - 1] != nullptr) && (Board[end.x][end.y] == nullptr) && !isWhite)
+    {
+      DEBUG;
+      Board[start.x][start.y - 1] = nullptr;
+      firstMove = false;
+      return true;
+    }
+    // kill move for white
     else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) ||
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
-             (Board[end.x][end.y] != nullptr))
+             (Board[end.x][end.y] != nullptr) && isWhite)
+    {
+      firstMove = false;
+      return true;
+    }
+    // kill move for black
+    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y - 1]) ||
+              (Board[end.x][end.y] == Board[start.x - 1][start.y - 1])) &&
+             (Board[end.x][end.y] != nullptr) && !isWhite)
     {
       firstMove = false;
       return true;
@@ -329,14 +346,26 @@ public:
       cout << "Invalid Pawn move, piece in the way." << endl;
       return false;
     }
-    // All good can move forward
-    else if (start.x == end.x && start.y + 1 == end.y)
+    // All good can move forward white
+    else if (start.x == end.x && start.y + 1 == end.y && isWhite)
     {
       firstMove = false;
       return true;
     }
-    // move forward twice on first move
-    else if (firstMove && (Board[end.x][end.y] == Board[start.x][start.y + 2]))
+    // All good can move forward black
+    else if (start.x == end.x && start.y - 1 == end.y && !isWhite)
+    {
+      firstMove = false;
+      return true;
+    }
+    // move forward twice on first move, white
+    else if (firstMove && Board[end.x][end.y] == Board[start.x][start.y + 2] && isWhite)
+    {
+      firstMove = false;
+      return true;
+    }
+    // move forward twice on first move black
+    else if (firstMove && Board[end.x][end.y] == Board[start.x][start.y - 2] && !isWhite)
     {
       firstMove = false;
       return true;
