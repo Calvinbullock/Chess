@@ -525,7 +525,7 @@ void Turn()
   }
   std::cout << endl;
 
-  // This will stop people from useing a nullptr as the start postion.
+  // This will stop people from entering a nullptr as the start postion.
   if (Board[start.x][start.y] == nullptr)
   {
     std::cout << "starting point has no piece" << endl;
