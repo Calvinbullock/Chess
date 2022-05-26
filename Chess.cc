@@ -7,6 +7,8 @@
 
 // **FOCUS ON THESE**
 // TODO Make turn() function
+// Game ends when only kings are left -- gameOver() fuction
+// traid between colours allowed to move -- Implement Turns
 
 #include <iostream>
 #include <string>
@@ -16,8 +18,10 @@
 // #define DEBUG std::cout
 // #define DEBUG_FUNC std::cout
 
+// GOLABLE VARIABLES / MEATHODS
 using namespace std;
-
+bool IS_KING_DEAD_WHITE = false;
+bool IS_KING_DEAD_BLACK = false;
 void Turn();
 
 // parse the points that the player inputs.
@@ -301,7 +305,7 @@ public:
 
   bool ValidMove(Position start, Position end) override
   {
-    // Gets the colour of the pawn and sets it to a boolean 
+    // Gets the colour of the pawn and sets it to a boolean
     bool isWhite = Board[start.x][start.y]->color == "white";
 
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
@@ -393,7 +397,7 @@ void BoardReset()
 
   for (int x = 0; x < 8; x++)
   {
-    Board[x][1] = new Pawn("white"); // comment out when testing
+    // Board[x][1] = new Pawn("white"); // comment out when testing
     Board[x][6] = new Pawn("black");
     // Board[3][3] = new Pawn("black"); // For easy move testing TODO REMOVE when ready
   }
@@ -410,7 +414,8 @@ void BoardReset()
   Board[0][7] = new Rook("black");
   Board[1][7] = new Knight("black");
   Board[2][7] = new Bishop("black");
-  Board[3][7] = new King("black");
+  // Board[3][7] = new King("black");
+  Board[0][2] = new King("black"); // DEBUG KING
   Board[4][7] = new Queen("black");
   Board[5][7] = new Bishop("black");
   Board[6][7] = new Knight("black");
@@ -537,20 +542,59 @@ void Turn()
   }
 }
 
+// Returns true and prints games over when black or white king dies
+int gameOver()
+{
+  IS_KING_DEAD_BLACK = false;
+  IS_KING_DEAD_WHITE = false;
+
+  // Iterates through the Board and check for two kings -- IN PROGRESS
+  for (int x = 0; x < 7; x++)
+  {
+    for (int y = 0; y < 7; y++)
+    {
+      if (Board[x][y] != nullptr && Board[x][y]->letter == "G")
+      {
+        if (Board[x][y]->color == "white")
+        {
+          IS_KING_DEAD_WHITE = true;
+        }
+        else if (Board[x][y] != nullptr && Board[x][y]->color == "black")
+        {
+          IS_KING_DEAD_BLACK = true;
+        }
+      }
+    }
+  }
+
+  // Checks if king is dead
+  if (IS_KING_DEAD_BLACK)
+  {
+    std::cout << "-------- Game Over --------" << endl
+              << "-------- White Wins --------" << endl << endl;
+    return 1;
+  }
+  else if (IS_KING_DEAD_WHITE)
+  {
+    std::cout << "---------- Game Over ----------" << endl
+              << "--------- Black Wins --------- " << endl << endl;
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
 #if 1 // FOR DEBUG purposes
 int main()
 {
-  BoardReset();
-
   int winner = 0;
+  BoardReset();
   while (winner == 0)
   {
-
     Turn();
-    // TODO the 3 lines of comments below AKA GAME OVER?
-    // have it check for two Gs (kings), to see if the game is over ****TO DO
-    // std::cout << "If game over, enter 1." << endl;
-    // std::cin >> winner; // ****TODO put this back
+    winner = gameOver();
   }
   return 0;
 }
