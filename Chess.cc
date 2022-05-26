@@ -397,7 +397,7 @@ void BoardReset()
 
   for (int x = 0; x < 8; x++)
   {
-    // Board[x][1] = new Pawn("white"); // comment out when testing
+    Board[x][1] = new Pawn("white"); // comment out when testing
     Board[x][6] = new Pawn("black");
     // Board[3][3] = new Pawn("black"); // For easy move testing TODO REMOVE when ready
   }
