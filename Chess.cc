@@ -551,7 +551,6 @@ int gameOver()
   {
     for (int y = 0; y < 8; y++)
     {
-
       if (Board[x][y] != nullptr && Board[x][y]->letter == "G")
       {
         if (Board[x][y]->color == "white")
@@ -581,10 +580,8 @@ int gameOver()
               << endl;
     return 1;
   }
-  else
-  {
-    return 0;
-  }
+  
+  return 0;
 }
 
 #if 1 // FOR DEBUG purposes
