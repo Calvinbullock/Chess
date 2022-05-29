@@ -543,8 +543,8 @@ void Turn()
 // Returns true and prints games over when black or white king dies
 int gameOver()
 {
-  bool IS_KING_DEAD_BLACK = false;
-  bool IS_KING_DEAD_WHITE = false;
+  bool isKingDead_Black = false;
+  bool isKingDead_White = false;
 
   // Iterates through the Board and check for two kings -- IN PROGRESS
   for (int x = 0; x < 8; x++)
@@ -556,25 +556,25 @@ int gameOver()
       {
         if (Board[x][y]->color == "white")
         {
-          IS_KING_DEAD_WHITE = true;
+          isKingDead_White = true;
         }
         else if (Board[x][y]->color == "black")
         {
-          IS_KING_DEAD_BLACK = true;
+          isKingDead_Black = true;
         }
       }
     }
   }
 
   // Checks if king is dead
-  if (!IS_KING_DEAD_BLACK)
+  if (!isKingDead_Black)
   {
     std::cout << "-------- Game Over --------" << endl
               << "-------- White Wins --------" << endl
               << endl;
     return 1;
   }
-  else if (!IS_KING_DEAD_WHITE)
+  else if (!isKingDead_White)
   {
     std::cout << "---------- Game Over ----------" << endl
               << "--------- Black Wins --------- " << endl
