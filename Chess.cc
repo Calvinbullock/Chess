@@ -20,8 +20,6 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-bool IS_KING_DEAD_WHITE = false;
-bool IS_KING_DEAD_BLACK = false;
 void Turn();
 
 // parse the points that the player inputs.
@@ -424,7 +422,8 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard()
 {
-  std::cout << endl << "  A   B   C   D   E   F   G   H  " << endl;
+  std::cout << endl
+            << "  A   B   C   D   E   F   G   H  " << endl;
   for (int i = 0; i <= 32; i++)
   {
     std::cout << "-";
@@ -544,21 +543,22 @@ void Turn()
 // Returns true and prints games over when black or white king dies
 int gameOver()
 {
-  IS_KING_DEAD_BLACK = false;
-  IS_KING_DEAD_WHITE = false;
+  bool IS_KING_DEAD_BLACK = false;
+  bool IS_KING_DEAD_WHITE = false;
 
   // Iterates through the Board and check for two kings -- IN PROGRESS
-  for (int x = 0; x < 7; x++)
+  for (int x = 0; x < 8; x++)
   {
-    for (int y = 0; y < 7; y++)
+    for (int y = 0; y < 8; y++)
     {
+
       if (Board[x][y] != nullptr && Board[x][y]->letter == "G")
       {
         if (Board[x][y]->color == "white")
         {
           IS_KING_DEAD_WHITE = true;
         }
-        else if (Board[x][y] != nullptr && Board[x][y]->color == "black")
+        else if (Board[x][y]->color == "black")
         {
           IS_KING_DEAD_BLACK = true;
         }
@@ -567,16 +567,18 @@ int gameOver()
   }
 
   // Checks if king is dead
-  if (IS_KING_DEAD_BLACK)
+  if (!IS_KING_DEAD_BLACK)
   {
     std::cout << "-------- Game Over --------" << endl
-              << "-------- White Wins --------" << endl << endl;
+              << "-------- White Wins --------" << endl
+              << endl;
     return 1;
   }
-  else if (IS_KING_DEAD_WHITE)
+  else if (!IS_KING_DEAD_WHITE)
   {
     std::cout << "---------- Game Over ----------" << endl
-              << "--------- Black Wins --------- " << endl << endl;
+              << "--------- Black Wins --------- " << endl
+              << endl;
     return 1;
   }
   else
