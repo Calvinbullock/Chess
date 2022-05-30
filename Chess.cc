@@ -8,7 +8,6 @@
 // **FOCUS ON THESE**
 // TODO Make turn() function
 // Game ends when only kings are left -- gameOver() fuction
-// traid between colours allowed to move -- Implement Turns
 
 #include <iostream>
 #include <string>
