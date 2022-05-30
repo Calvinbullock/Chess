@@ -20,7 +20,7 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void Turn();
+void Turn(); // Two functions calleach other so this keeps the one in scope of the other
 
 // parse the points that the player inputs.
 class Position
