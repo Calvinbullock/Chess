@@ -6,7 +6,6 @@
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
-// TODO Make turn() function
 // Game ends when only kings are left -- gameOver() fuction
 
 #include <iostream>
