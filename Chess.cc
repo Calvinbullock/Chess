@@ -21,6 +21,7 @@
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
 void Turn(); // Two functions calleach other so this keeps the one in scope of the other
+bool IS_WHITE_TURN = true;
 
 // parse the points that the player inputs.
 class Position
@@ -521,7 +522,7 @@ void Turn()
     }
     catch (const char *invalid)
     {
-      std::cout << "error invalid position:" << str << endl;
+      std::cout << "Error invalid position:" << str << endl;
       continue;
     }
     break;
@@ -531,12 +532,27 @@ void Turn()
   // This will stop people from entering a nullptr as the start postion.
   if (Board[start.x][start.y] == nullptr)
   {
-    std::cout << "starting point has no piece" << endl;
+    std::cout << "Starting point has no piece" << endl;
     Turn();
   }
   else
   {
-    Movement(start, end);
+    // Checks if its the turn of the colour moveing.
+    if (IS_WHITE_TURN && Board[start.x][start.y]->color == "white")
+    {
+      Movement(start, end);
+      IS_WHITE_TURN = false;
+    }
+    else if (!IS_WHITE_TURN && Board[start.x][start.y]->color == "black")
+    {
+      Movement(start, end);
+      IS_WHITE_TURN = true;
+    }
+    else
+    {
+      std::cout << "Not your turn" << endl;
+      Turn();
+    }
   }
 }
 
@@ -580,7 +596,7 @@ int gameOver()
               << endl;
     return 1;
   }
-  
+
   return 0;
 }
 
