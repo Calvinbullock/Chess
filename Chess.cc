@@ -19,7 +19,7 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void Turn(); // Two functions calleach other so this keeps the one in scope of the other
+void Turn(); // Two functions call each other so this keeps the one in scope of the other
 bool IS_WHITE_TURN = true;
 
 // parse the points that the player inputs.
