@@ -9,7 +9,6 @@
 // **FOCUS ON THESE**
 // TODO Game ends when only kings are left -- gameOver() fuction
 // TODO Remove couts that ERROR_MSG replaced -- Not yet -- good for DEBUG
-// TODO Disply what colours turn it is
 
 #include <iostream>
 #include <string>
@@ -460,6 +459,15 @@ void PrintBoard()
 
   std::cout << "Errors: " << ERROR_MSG << endl;
   std::cout << "Turn: " << TURN_NUM << endl;
+  if (TURN_NUM % 2 == 0)
+  {
+  std::cout << "Purple/White's Turn" << endl;
+  }
+  else
+  {
+  std::cout << "Blue/Black's Turn" << endl;
+  }
+
   ERROR_MSG = "None";
 
   std::cout << endl
