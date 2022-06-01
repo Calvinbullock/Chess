@@ -8,6 +8,7 @@
 // **FOCUS ON THESE**
 // TODO Game ends when only kings are left -- gameOver() fuction
 // TODO Remove couts that ERROR_MSG replaced -- Not yet -- good for DEBUG
+// TODO Disply what colours turn it is
 
 #include <iostream>
 #include <string>
