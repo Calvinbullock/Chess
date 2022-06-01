@@ -22,7 +22,7 @@
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
 void Turn(); // Two functions call each other so this keeps the one in scope of the other
-bool IS_WHITE_TURN = true;
+// bool IS_WHITE_TURN = true; // TODO Remove
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
 
@@ -571,15 +571,15 @@ void Turn()
   else
   {
     // Checks if its the turn of the colour moveing.
-    if (IS_WHITE_TURN && Board[start.x][start.y]->color == "white")
+    if (TURN_NUM % 2 == 0 && Board[start.x][start.y]->color == "white")
     {
       Movement(start, end);
-      IS_WHITE_TURN = false;
+      // IS_WHITE_TURN = false;
     }
-    else if (!IS_WHITE_TURN && Board[start.x][start.y]->color == "black")
+    else if (TURN_NUM % 2 == 1 && Board[start.x][start.y]->color == "black")
     {
       Movement(start, end);
-      IS_WHITE_TURN = true;
+      // IS_WHITE_TURN = true;
     }
     else
     {
