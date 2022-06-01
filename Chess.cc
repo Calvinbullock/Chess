@@ -354,6 +354,7 @@ public:
               (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
              (Board[end.x][end.y] != nullptr) && isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
@@ -362,6 +363,7 @@ public:
               (Board[end.x][end.y] == Board[start.x - 1][start.y - 1])) &&
              (Board[end.x][end.y] != nullptr) && !isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
@@ -374,24 +376,28 @@ public:
     // All good can move forward white
     else if (start.x == end.x && start.y + 1 == end.y && isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
     // All good can move forward black
     else if (start.x == end.x && start.y - 1 == end.y && !isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
     // move forward twice on first move, white
-    else if (firstMove && Board[end.x][end.y] == Board[start.x][start.y + 2] && isWhite)
+    else if (firstMove && end.x == start.x && end.y == start.y + 2 && isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
     // move forward twice on first move black
-    else if (firstMove && Board[end.x][end.y] == Board[start.x][start.y - 2] && !isWhite)
+    else if (firstMove && end.x == start.x && end.y == start.y + 2 && !isWhite)
     {
+      DEBUG;
       firstMove = false;
       return true;
     }
