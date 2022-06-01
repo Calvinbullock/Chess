@@ -7,7 +7,7 @@
 
 // **FOCUS ON THESE**
 // TODO Game ends when only kings are left -- gameOver() fuction
-// TODO Remove couts that ERROR_MSG replaced
+// TODO Remove couts that ERROR_MSG replaced -- Not yet -- good for DEBUG
 
 #include <iostream>
 #include <string>
@@ -454,6 +454,7 @@ void PrintBoard()
   system("clear"); // clears the console
 
   std::cout << "Errors: " << ERROR_MSG << endl;
+  std::cout << "Turn: " << TURN_NUM << endl;
   ERROR_MSG = "None";
 
   std::cout << endl
