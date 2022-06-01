@@ -1,5 +1,6 @@
 /* Project Started March 2022 */
 // g++ Chess.cc && ./a.out --- use this to run it in Bash
+// WARNING TO SHOW DEBUGs COMEMNT OUT "system("clear");"
 
 // **FOR LATER**
 // TODO BLue team moves don't work properly
