@@ -6,8 +6,10 @@
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
-// Game ends when only kings are left -- gameOver() fuction
-// Git rid of IS_TURN_WHITE use TURN_NUM to check whose turn it is insted
+// TODO Game ends when only kings are left -- gameOver() fuction
+// TODO Git rid of IS_TURN_WHITE use TURN_NUM to check whose turn it is insted
+// TODO bug were if a Invalid move is made it skips that players turn - fix
+// TODO Remove couts that ERROR_MSG replaced
 
 #include <iostream>
 #include <string>
