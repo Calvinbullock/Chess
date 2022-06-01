@@ -587,7 +587,7 @@ int gameOver()
   {
     std::cout << "-------- Game Over --------" << endl
               << "-------- White Wins --------" << endl
-              << "-------- " << TURN_NUM << "\t---------" << endl
+              << "-------- " << TURN_NUM << " Turns ---------" << endl
               << endl;
     return 1;
   }
@@ -595,7 +595,7 @@ int gameOver()
   {
     std::cout << "-------- Game Over --------" << endl
               << "-------- Black Wins --------" << endl
-              << "-------- " << TURN_NUM << "\t--------" << endl
+              << "-------- " << TURN_NUM << "Turns --------" << endl
               << endl;
     return 1;
   }
