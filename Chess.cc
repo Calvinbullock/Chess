@@ -7,6 +7,7 @@
 
 // **FOCUS ON THESE**
 // Game ends when only kings are left -- gameOver() fuction
+// Git rid of IS_TURN_WHITE use TURN_NUM to check whose turn it is insted
 
 #include <iostream>
 #include <string>
@@ -20,6 +21,7 @@
 using namespace std;
 void Turn(); // Two functions call each other so this keeps the one in scope of the other
 bool IS_WHITE_TURN = true;
+int TURN_NUM = 0;
 
 // parse the points that the player inputs.
 class Position
@@ -475,6 +477,7 @@ void Movement(Position start, Position end)
     {
       Board[end.x][end.y] = Board[start.x][start.y];
       Board[start.x][start.y] = nullptr;
+      TURN_NUM++;
     }
   }
   else
@@ -584,13 +587,15 @@ int gameOver()
   {
     std::cout << "-------- Game Over --------" << endl
               << "-------- White Wins --------" << endl
+              << "-------- " << TURN_NUM << "\t---------" << endl
               << endl;
     return 1;
   }
   else if (!isKingDead_White)
   {
-    std::cout << "---------- Game Over ----------" << endl
-              << "--------- Black Wins --------- " << endl
+    std::cout << "-------- Game Over --------" << endl
+              << "-------- Black Wins --------" << endl
+              << "-------- " << TURN_NUM << "\t--------" << endl
               << endl;
     return 1;
   }
