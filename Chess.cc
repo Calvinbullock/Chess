@@ -21,6 +21,7 @@
 using namespace std;
 void Turn(); // Two functions call each other so this keeps the one in scope of the other
 bool IS_WHITE_TURN = true;
+string ERROR_MSG = "None";
 int TURN_NUM = 0;
 
 // parse the points that the player inputs.
@@ -104,6 +105,7 @@ public:
         if ((Board[x][start.y] != nullptr))
         {
           cout << "Invalid Rook move, piece in path." << endl;
+          ERROR_MSG = "Invalid Rook move, piece in path.";
           return false;
         }
       }
@@ -115,6 +117,7 @@ public:
         if ((Board[start.x][y] != nullptr))
         {
           cout << "Invalid Rook move, piece in path." << endl;
+          ERROR_MSG = "Invalid Rook move, piece in path.";
           return false;
         }
       }
@@ -122,12 +125,14 @@ public:
     else
     {
       std::cout << "Invalid Rook move." << endl;
+      ERROR_MSG = "Invalid Rook move.";
       return false;
     }
 
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Rook move, team piece in path." << endl;
+      ERROR_MSG = "Invalid Rook move, team piece in path.";
       return false;
     }
 
@@ -146,6 +151,7 @@ public:
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid Knight move, team kill." << endl;
+      ERROR_MSG = "Invalid Knight move, team kill.";
       return false;
     }
     else if (((end.x == start.x + 2) && (end.y == start.y - 1)) || ((end.x == start.x + 2) && (end.y == start.y + 1)) ||
@@ -156,6 +162,7 @@ public:
       return true;
     }
     std::cout << "Invalid Knight move." << endl;
+    ERROR_MSG = "Invalid Knight move.";
     return false;
   }
 };
@@ -175,6 +182,7 @@ public:
       if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Bishop move, piece in the way" << endl;
+        ERROR_MSG = "Invalid Bishop move, piece in the way";
         return false;
       }
     }
@@ -184,11 +192,13 @@ public:
     if (abs(start.x - end.x) != abs(start.y - end.y))
     {
       std::cout << "Invalid Bishop move" << endl;
+      ERROR_MSG = "Invalid Bishop move";
       return false;
     }
     else if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid Bishop move, team piece in the way" << endl;
+      ERROR_MSG = "Invalid Bishop move, team piece in the way";
       return false;
     }
 
@@ -199,6 +209,7 @@ public:
       if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Bishop move, piece in the way" << endl;
+        ERROR_MSG = "Invalid Bishop move, piece in the way";
         return false;
       }
     }
@@ -217,6 +228,7 @@ public:
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       std::cout << "Invalid King move, team kill." << endl;
+      ERROR_MSG = "Invalid King move, team kill.";
       return false;
     }
     else if ((abs(end.x - start.x) <= 1) && (abs(start.y - end.y) <= 1))
@@ -224,6 +236,7 @@ public:
       return true;
     }
     std::cout << "Invalid King move." << endl;
+    ERROR_MSG = "Invalid King move.";
     return false;
   }
 };
@@ -240,6 +253,7 @@ public:
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Queen move, team piece in path." << endl;
+      ERROR_MSG = "Invalid Queen move, team piece in path.";
       return false;
     }
 
@@ -253,6 +267,7 @@ public:
     else if (abs(start.x - end.x) != abs(start.y - end.y))
     {
       std::cout << "Invalid Queen move" << endl;
+      ERROR_MSG = "Invalid Queen move";
       return false;
     }
 
@@ -263,6 +278,7 @@ public:
       if (Board[x][y] == nullptr)
       {
         std::cout << "Invalid Queen move, piece in the way" << endl;
+        ERROR_MSG = "Invalid Queen move, piece in the way";
         return false;
       }
     }
@@ -275,6 +291,7 @@ public:
         if ((Board[x][start.y] != nullptr)) // y check
         {
           cout << "Invalid Queen move, piece in path." << endl;
+          ERROR_MSG = "Invalid Queen move, piece in path.";
           return false;
         }
       }
@@ -286,6 +303,7 @@ public:
         if ((Board[start.x][y] != nullptr))
         {
           cout << "Invalid Queen move, piece in path." << endl;
+          ERROR_MSG = "Invalid Queen move, piece in path.";
           return false;
         }
       }
@@ -310,6 +328,7 @@ public:
     if (Board[end.x][end.y] != nullptr && (Board[start.x][start.y]->color == Board[end.x][end.y]->color))
     {
       cout << "Invalid Pawn move, team piece in path." << endl;
+      ERROR_MSG = "Invalid Pawn move, team piece in path.";
       return false;
     }
     // En passant move for white
@@ -347,6 +366,7 @@ public:
     else if ((Board[end.x][end.y] != nullptr))
     {
       cout << "Invalid Pawn move, piece in the way." << endl;
+      ERROR_MSG = "Invalid Pawn move, piece in the way.";
       return false;
     }
     // All good can move forward white
@@ -374,6 +394,7 @@ public:
       return true;
     }
     cout << "Invalid Pawn move." << endl;
+    ERROR_MSG = "Invalid Pawn move.";
     return false;
   }
 };
@@ -423,6 +444,11 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard()
 {
+  system("clear"); // clears the console
+
+  std::cout << "Errors: " << ERROR_MSG << endl;
+  ERROR_MSG = "None";
+
   std::cout << endl
             << "  A   B   C   D   E   F   G   H  " << endl;
   for (int i = 0; i <= 32; i++)
@@ -483,6 +509,7 @@ void Movement(Position start, Position end)
   else
   {
     std::cout << "Your start and end coordinates are identicle plaese enter diffrent ones." << endl;
+    ERROR_MSG = "Your start and end coordinates are identicle plaese enter diffrent ones.";
     Turn();
   }
   return;
@@ -498,7 +525,7 @@ void Turn()
   while (true)
   {
     char str[3];
-    std::cout << "Type start postion of your move:" << endl;
+    std::cout << "Type start postion of your move:" << endl;  
     std::cin >> str;
     try
     {
@@ -507,6 +534,7 @@ void Turn()
     catch (const char *invalid)
     {
       std::cout << "error invalid position:" << str << endl;
+      ERROR_MSG = "invalid position:";
       continue;
     }
     break;
@@ -524,6 +552,7 @@ void Turn()
     catch (const char *invalid)
     {
       std::cout << "Error invalid position:" << str << endl;
+      ERROR_MSG = "invalid position:";
       continue;
     }
     break;
@@ -534,6 +563,7 @@ void Turn()
   if (Board[start.x][start.y] == nullptr)
   {
     std::cout << "Starting point has no piece" << endl;
+    ERROR_MSG = "Starting point has no piece";
     Turn();
   }
   else
@@ -552,6 +582,7 @@ void Turn()
     else
     {
       std::cout << "Not your turn" << endl;
+      ERROR_MSG = "Not your turn";
       Turn();
     }
   }
