@@ -350,17 +350,18 @@ public:
       return true;
     }
     // kill move for white
-    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y + 1]) ||
-              (Board[end.x][end.y] == Board[start.x - 1][start.y + 1])) &&
+    else if ((end.x == start.x + 1 && end.y == start.y + 1 ||
+              end.x == start.x - 1 && end.y == start.y + 1) &&
              (Board[end.x][end.y] != nullptr) && isWhite)
+
     {
       DEBUG;
       firstMove = false;
       return true;
     }
     // kill move for black
-    else if (((Board[end.x][end.y] == Board[start.x + 1][start.y - 1]) ||
-              (Board[end.x][end.y] == Board[start.x - 1][start.y - 1])) &&
+    else if ((end.x == start.x + 1 && end.y == start.y - 1 ||
+              end.x == start.x - 1 && end.y == start.y - 1) &&
              (Board[end.x][end.y] != nullptr) && !isWhite)
     {
       DEBUG;
@@ -395,7 +396,7 @@ public:
       return true;
     }
     // move forward twice on first move black
-    else if (firstMove && end.x == start.x && end.y == start.y + 2 && !isWhite)
+    else if (firstMove && end.x == start.x && end.y == start.y - 2 && !isWhite)
     {
       DEBUG;
       firstMove = false;
@@ -533,7 +534,7 @@ void Turn()
   while (true)
   {
     char str[3];
-    std::cout << "Type start postion of your move:" << endl;  
+    std::cout << "Type start postion of your move:" << endl;
     std::cin >> str;
     try
     {
