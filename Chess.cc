@@ -22,7 +22,7 @@
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
 void Turn(); // Two functions call each other so this keeps the one in scope of the other
-// bool IS_WHITE_TURN = true; // TODO Remove
+bool DEBUG_MODE;
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
 
@@ -453,7 +453,10 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard()
 {
-  system("clear"); // clears the console
+  if (DEBUG_MODE == true)
+  {
+    system("clear"); // clears the console
+  }
 
   std::cout << "Errors: " << ERROR_MSG << endl;
   std::cout << "Turn: " << TURN_NUM << endl;
@@ -647,6 +650,12 @@ int gameOver()
 #if 1 // FOR DEBUG purposes
 int main()
 {
+  // FOR debuger mode
+  string debug_mode;
+  std::cout << "Do you want debug mode (y/n)" << endl;
+  cin >> debug_mode;
+  DEBUG_MODE = debug_mode.compare("y");
+
   int winner = 0;
   BoardReset();
   while (winner == 0)
