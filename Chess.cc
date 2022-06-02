@@ -8,7 +8,6 @@
 
 // **FOCUS ON THESE**
 // TODO Game ends when only kings are left -- gameOver() fuction
-// TODO Remove couts that ERROR_MSG replaced -- Not yet -- good for DEBUG
 
 #include <iostream>
 #include <string>
