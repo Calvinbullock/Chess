@@ -87,6 +87,7 @@ public:
   }
 };
 
+
 Piece *Board[8][8];
 
 class Rook : public Piece
@@ -439,11 +440,11 @@ void PrintBoard()
   std::cout << "Turn: " << TURN_NUM << endl;
   if (TURN_NUM % 2 == 0)
   {
-  std::cout << "Purple/White's Turn" << endl;
+    std::cout << "Purple/White's Turn" << endl;
   }
   else
   {
-  std::cout << "Blue/Black's Turn" << endl;
+    std::cout << "Blue/Black's Turn" << endl;
   }
 
   ERROR_MSG = "None";
@@ -650,16 +651,34 @@ int main()
 int main()
 {
   BoardReset();
-  Movement(Position("a1"), Position("b2"));
-  if (board[2][2] == 'c')
+
+  Position test1 = Position("a1");
+  // Position test1 = Position("a3");
+  // pawn move check
+
+  if (Board[0][1] != nullptr && Board[0][1]->ValidMove(test1, test1))
+  {
+    std::cout << "Pass" << endl;
+    std::cout << ERROR_MSG << endl;
+  }
+  else
+  {
+    std::cout << "Fail" << endl;
+    std::cout << ERROR_MSG << endl;
+  }
+
+  if (Board[0][0] == nullptr)
   {
     std::cout << "Yeah!!!" << endl;
   }
   else
   {
-    std::cout << "Boo!!!" << endl;
+    std::cout << "Boi" << endl;
     exit(1);
   }
   return 0;
 }
 #endif
+
+// ValidMove(Position start, Position end)
+// bool classptr->ValidMove(Position start, Position end) override
