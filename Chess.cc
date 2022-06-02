@@ -74,7 +74,6 @@ public:
     color = colourIn;
     letter = letterIn;
     // This uses bash termanial colour conventions to display team colours.
-    // If you are running a diffrent terminal language it may not display correct. __WARNING__
     if (colourIn == "white")
     {
       printPiece = "\033[34;1;4m" + letterIn + "\033[0m";
