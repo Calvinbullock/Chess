@@ -8,6 +8,8 @@
 
 // **FOCUS ON THESE**
 // TODO Game ends when only kings are left -- gameOver() fuction
+// TODO clock ncurses
+// Special moves - look at wiki for all moves
 
 #include <iostream>
 #include <string>
