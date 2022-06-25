@@ -433,7 +433,7 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard()
 {
-  if (DEBUG_MODE == true)
+  if (DEBUG_MODE == false)
   {
     system("clear"); // clears the console
   }
@@ -638,7 +638,7 @@ int main()
   string debug_mode;
   std::cout << "Do you want debug mode (y/n)" << endl;
   cin >> debug_mode;
-  DEBUG_MODE = debug_mode.compare("y");
+  DEBUG_MODE = debug_mode.compare("n");
 
   int winner = 0;
   BoardReset();
