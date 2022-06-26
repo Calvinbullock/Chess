@@ -89,7 +89,6 @@ public:
   }
 };
 
-
 Piece *Board[8][8];
 
 class Rook : public Piece
