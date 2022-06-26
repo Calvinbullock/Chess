@@ -514,6 +514,12 @@ void Movement(Position start, Position end)
 void Turn()
 {
   PrintBoard();
+  }
+  else
+  {
+    PrintBoard_ncurse();
+  }
+
   Position start, end;
   // **TODO** make sure to check only 2 chars get entered per "cin" otherwise bad things happen
 
