@@ -513,7 +513,10 @@ void Movement(Position start, Position end)
 // Takes input from the payer and parses it for other methods
 void Turn()
 {
-  PrintBoard();
+
+  if (DEBUG_MODE == true)
+  {
+    PrintBoard();
   }
   else
   {
