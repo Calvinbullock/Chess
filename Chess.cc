@@ -433,11 +433,6 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard()
 {
-  if (DEBUG_MODE == false)
-  {
-    system("clear"); // clears the console
-  }
-
   std::cout << "Errors: " << ERROR_MSG << endl;
   std::cout << "Turn: " << TURN_NUM << endl;
   if (TURN_NUM % 2 == 0)
