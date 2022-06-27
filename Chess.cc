@@ -11,6 +11,7 @@
 // TODO clock ncurses
 // Special moves - look at wiki for all moves
 
+#include <ncurses.h>
 #include <iostream>
 #include <string>
 
@@ -76,6 +77,7 @@ public:
     color = colourIn;
     letter = letterIn;
     // This uses bash termanial colour conventions to display team colours.
+    // I don't think this code is ever used....
     if (colourIn == "white")
     {
       printPiece = "\033[34;1;4m" + letterIn + "\033[0m";
@@ -488,6 +490,93 @@ void PrintBoard()
   std::cout << endl;
   std::cout << "  A   B   C   D   E   F   G   H  " << endl;
   std::cout << endl;
+}
+
+// initscr();  /* Start curses mode 		          */
+// refresh();  /* Print it on to the real screen  */
+// getch();    /* Wait for user input             */
+// endwin();   /* End curses mode		              */
+// getstr()    /*class: Get strings               */
+
+// TODO here -------- >
+// right now the curses window prints but will move on before the user can see it
+// that needs to be fixed
+
+// Prints out the board and all of it's peice placement
+void PrintBoard_ncurse()
+{
+  initscr(); /* Start curses mode */
+  refresh(); /* Print it on to the real screen */
+  start_color();
+  init_pair(1, COLOR_BLUE, COLOR_BLACK);
+  init_pair(2, COLOR_WHITE, COLOR_BLACK);
+
+  printw("Errors: %s\n", ERROR_MSG.c_str());
+  // printw("Turn: " + TURN_NUM);
+
+  if (TURN_NUM % 2 == 0)
+  {
+    printw("Purple/White's Turn\n");
+  }
+  else
+  {
+    printw("Blue/Black's Turn\n");
+  }
+
+  ERROR_MSG = "None";
+  attron(COLOR_PAIR(2));
+
+  printw("\n");
+  printw("  A   B   C   D   E   F   G   H  \n");
+
+  for (int i = 0; i <= 32; i++)
+  {
+    printw("-");
+  }
+
+  // prints out table with inner and outer loops
+  // the loop below is for the rows
+  for (int y = 0; y < 8; y++)
+  {
+    printw("\n");
+
+    // The loop below is for the columns
+    for (int x = 0; x < 8; x++)
+    {
+      if (Board[x][y] == nullptr)
+      {
+        printw("|   ");
+      }
+      else if (Board[x][y]->color == "white")
+      {
+        printw("| %s ", Board[x][y]->letter.c_str());
+      }
+      else
+      {
+        printw("| ");
+        attron(COLOR_PAIR(1)); // TODO  the colour isent changeing!!!!
+        printw("%s ", Board[x][y]->letter.c_str());
+        attroff(COLOR_PAIR(1));
+      }
+    }
+
+    printw("| %s\n", std::to_string(y + 1).c_str());
+
+    for (int j = 0; j <= 32; j++)
+    {
+      printw("-");
+    }
+  }
+  printw("\n");
+  printw("  A   B   C   D   E   F   G   H  \n");
+  printw("\n");
+
+  char *nameTemp = new char[160];
+  printw(nameTemp);
+  getstr(nameTemp);
+
+  attroff(COLOR_PAIR(2));
+  endwin(); /* End curses mode */
 }
 
 /*checks for legal movments*/
