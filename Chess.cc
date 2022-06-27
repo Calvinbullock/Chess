@@ -512,7 +512,7 @@ void PrintBoard_ncurse()
   init_pair(2, COLOR_WHITE, COLOR_BLACK);
 
   printw("Errors: %s\n", ERROR_MSG.c_str());
-  // printw("Turn: " + TURN_NUM);
+  printw("Turn: %s\n", std::to_string(TURN_NUM).c_str());
 
   if (TURN_NUM % 2 == 0)
   {
@@ -554,7 +554,7 @@ void PrintBoard_ncurse()
       else
       {
         printw("| ");
-        attron(COLOR_PAIR(1)); // TODO  the colour isent changeing!!!!
+        attron(COLOR_PAIR(1));
         printw("%s ", Board[x][y]->letter.c_str());
         attroff(COLOR_PAIR(1));
       }
