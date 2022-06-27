@@ -22,7 +22,7 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void Turn(); // Two functions call each other so this keeps the one in scope of the other
+void TurnImput(); // Two functions call each other so this keeps the one in scope of the other
 bool DEBUG_MODE;
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
@@ -594,13 +594,13 @@ void Movement(Position start, Position end)
   else
   {
     ERROR_MSG = "Your start and end coordinates are identicle plaese enter diffrent ones.";
-    Turn();
+    TurnImput();
   }
   return;
 }
 
 // Takes input from the payer and parses it for other methods
-void Turn()
+void TurnInput()
 {
 
   if (DEBUG_MODE == true)
@@ -654,7 +654,7 @@ void Turn()
   if (Board[start.x][start.y] == nullptr)
   {
     ERROR_MSG = "Starting point has no piece";
-    Turn();
+    TurnInput();
   }
   else
   {
@@ -672,7 +672,7 @@ void Turn()
     else
     {
       ERROR_MSG = "Not your turn";
-      Turn();
+      TurnInput();
     }
   }
 }
@@ -736,7 +736,7 @@ int main()
   BoardReset();
   while (winner == 0)
   {
-    Turn();
+    TurnImput();
     winner = gameOver();
   }
   return 0;
