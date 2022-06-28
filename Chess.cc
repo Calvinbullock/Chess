@@ -606,17 +606,6 @@ void Movement(Position start, Position end)
 // Takes input from the payer and parses it for other methods
 void TurnInput()
 {
-
-  // here
-  if (DEBUG_MODE == true)
-  {
-    PrintBoard();
-  }
-  else
-  {
-    PrintBoard_ncurse();
-  }
-
   Position start, end;
   // **TODO** make sure to check only 2 chars get entered per "cin" otherwise bad things happen
 
