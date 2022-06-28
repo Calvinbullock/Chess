@@ -730,6 +730,7 @@ int IsKingOnBoard()
 #if 1 // FOR DEBUG purposes
 int main()
 {
+  // Called here so that it is the first thing asked
   // FOR debuger mode
   string debug_mode;
   std::cout << "Do you want debug mode (y/n)" << endl;
@@ -738,6 +739,7 @@ int main()
 
   int winner = 0;
   BoardReset();
+
   while (winner == 0)
   {
     TurnInput();
