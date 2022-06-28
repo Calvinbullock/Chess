@@ -607,6 +607,7 @@ void Movement(Position start, Position end)
 void TurnInput()
 {
 
+  // here
   if (DEBUG_MODE == true)
   {
     PrintBoard();
@@ -727,15 +728,20 @@ int IsKingOnBoard()
   return 0;
 }
 
+void DebugMode()
+{
+  // FOR debuger mode
+  string debug_answer;
+  std::cout << "Do you want debug mode (y/n)" << endl;
+
+  cin >> debug_answer;
+  DEBUG_MODE = debug_answer.compare("n");
+}
+
 #if 1 // FOR DEBUG purposes
 int main()
 {
-  // Called here so that it is the first thing asked
-  // FOR debuger mode
-  string debug_mode;
-  std::cout << "Do you want debug mode (y/n)" << endl;
-  cin >> debug_mode;
-  DEBUG_MODE = debug_mode.compare("n");
+  DebugMode();
 
   int winner = 0;
   BoardReset();
