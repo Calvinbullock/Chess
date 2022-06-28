@@ -492,19 +492,20 @@ void PrintBoard()
   std::cout << endl;
 }
 
-// initscr();  /* Start curses mode 		          */
-// refresh();  /* Print it on to the real screen  */
-// getch();    /* Wait for user input             */
-// endwin();   /* End curses mode		              */
-// getstr()    /*class: Get strings               */
-
-// TODO here -------- >
-// right now the curses window prints but will move on before the user can see it
-// that needs to be fixed
-
 // Prints out the board and all of it's peice placement
 void PrintBoard_ncurse()
 {
+
+  // initscr();  /* Start curses mode 		          */
+  // refresh();  /* Print it on to the real screen  */
+  // getch();    /* Wait for user input             */
+  // endwin();   /* End curses mode		              */
+  // getstr()    /*class: Get strings               */
+
+  // TODO here -------- >
+  // right now the curses window prints but will move on before the user can see it
+  // that needs to be fixed
+
   initscr(); /* Start curses mode */
   refresh(); /* Print it on to the real screen */
   start_color();
