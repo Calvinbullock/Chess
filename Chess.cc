@@ -7,7 +7,7 @@
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
-// TODO Game ends when only kings are left -- gameOver() fuction
+// TODO Game ends when only kings are left -- IsKingOnBoard() fuction
 // TODO clock ncurses
 // Special moves - look at wiki for all moves
 
@@ -681,7 +681,7 @@ void TurnInput()
 }
 
 // Returns true and prints games over when black or white king dies
-int gameOver()
+int IsKingOnBoard()
 {
   bool isKingDead_Black = false;
   bool isKingDead_White = false;
@@ -740,7 +740,7 @@ int main()
   while (winner == 0)
   {
     TurnInput();
-    winner = gameOver();
+    winner = IsKingOnBoard();
   }
   return 0;
 }
