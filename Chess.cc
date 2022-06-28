@@ -22,7 +22,7 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void TurnImput(); // Two functions call each other so this keeps the one in scope of the other
+void TurnInput(); // Two functions call each other so this keeps the one in scope of the other
 bool DEBUG_MODE;
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
@@ -571,6 +571,9 @@ void PrintBoard_ncurse()
   printw("  A   B   C   D   E   F   G   H  \n");
   printw("\n");
 
+  // TODO this needs to be set better to wait for input
+  // TODO this needs to be set better to wait for input
+  // TODO this needs to be set better to wait for input
   char *nameTemp = new char[160];
   printw(nameTemp);
   getstr(nameTemp);
@@ -594,7 +597,7 @@ void Movement(Position start, Position end)
   else
   {
     ERROR_MSG = "Your start and end coordinates are identicle plaese enter diffrent ones.";
-    TurnImput();
+    TurnInput();
   }
   return;
 }
@@ -736,7 +739,7 @@ int main()
   BoardReset();
   while (winner == 0)
   {
-    TurnImput();
+    TurnInput();
     winner = gameOver();
   }
   return 0;
