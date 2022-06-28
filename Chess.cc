@@ -738,21 +738,38 @@ void DebugMode()
   DEBUG_MODE = debug_answer.compare("n");
 }
 
-#if 1 // FOR DEBUG purposes
-int main()
+// will start the game and keep it running
+void GameStart()
 {
   DebugMode();
-
-  int winner = 0;
   BoardReset();
 
+  if (DEBUG_MODE == true)
+  {
+    PrintBoard();
+  }
+  else
+  {
+    PrintBoard_ncurse();
+  }
+
+  // will cuntinue the game until IsKingOnBoard returns 0
+  int winner = 0;
   while (winner == 0)
   {
     TurnInput();
     winner = IsKingOnBoard();
   }
+}
+
+#if 1 // FOR DEBUG purposes
+int main()
+{
+  GameStart();
+  
   return 0;
 }
+
 #else
 int main()
 {
