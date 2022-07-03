@@ -22,8 +22,7 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void TurnInput(); // Two functions call each other so this keeps the one in scope of the other
-bool DEBUG_MODE;
+void TurnInput_Ncurse();
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
 
@@ -572,12 +571,7 @@ void PrintBoard_ncurse()
   printw("  A   B   C   D   E   F   G   H  \n");
   printw("\n");
 
-  // TODO this needs to be set better to wait for input
-  // TODO this needs to be set better to wait for input
-  // TODO this needs to be set better to wait for input
-  char *nameTemp = new char[160];
-  printw(nameTemp);
-  getstr(nameTemp);
+  TurnInput_Ncurse();
 
   attroff(COLOR_PAIR(2));
   endwin(); /* End curses mode */
@@ -598,22 +592,22 @@ void Movement(Position start, Position end)
   else
   {
     ERROR_MSG = "Your start and end coordinates are identicle plaese enter diffrent ones.";
-    TurnInput();
+    TurnInput_Ncurse();
   }
   return;
 }
 
-// Takes input from the payer and parses it for other methods
-void TurnInput()
+void TurnInput_Ncurse()
 {
   Position start, end;
   // **TODO** make sure to check only 2 chars get entered per "cin" otherwise bad things happen
 
   while (true)
   {
-    char str[3];
-    std::cout << "Type start postion of your move:" << endl;
-    std::cin >> str;
+    printw("Type the start postion of your move: ");
+    char *str = new char[160];
+    getstr(str);
+
     try
     {
       start = Position(str);
@@ -628,9 +622,10 @@ void TurnInput()
 
   while (true)
   {
-    char str[3];
-    std::cout << "Type end postion of your move:" << endl;
-    std::cin >> str;
+    printw("Type the end postion of your move: ");
+    char *str = new char[160];
+    getstr(str);
+
     try
     {
       end = Position(str);
@@ -648,7 +643,7 @@ void TurnInput()
   if (Board[start.x][start.y] == nullptr)
   {
     ERROR_MSG = "Starting point has no piece";
-    TurnInput();
+    TurnInput_Ncurse();
   }
   else
   {
@@ -666,7 +661,7 @@ void TurnInput()
     else
     {
       ERROR_MSG = "Not your turn";
-      TurnInput();
+      TurnInput_Ncurse();
     }
   }
 }
@@ -717,36 +712,16 @@ int IsKingOnBoard()
   return 0;
 }
 
-void DebugMode()
-{
-  // FOR debuger mode
-  string debug_answer;
-  std::cout << "Do you want debug mode (y/n)" << endl;
-
-  cin >> debug_answer;
-  DEBUG_MODE = debug_answer.compare("n");
-}
-
 // will start the game and keep it running
 void GameStart()
 {
-  DebugMode();
   BoardReset();
-
-  if (DEBUG_MODE == true)
-  {
-    PrintBoard();
-  }
-  else
-  {
-    PrintBoard_ncurse();
-  }
 
   // will cuntinue the game until IsKingOnBoard returns 0
   int winner = 0;
   while (winner == 0)
   {
-    TurnInput();
+    PrintBoard_ncurse();
     winner = IsKingOnBoard();
   }
 }
@@ -755,7 +730,7 @@ void GameStart()
 int main()
 {
   GameStart();
-  
+
   return 0;
 }
 
