@@ -3,7 +3,6 @@
 // WARNING TO SHOW DEBUGs COMEMNT OUT "system("clear");"
 
 // **FOR LATER**
-// TODO BLue team moves don't work properly
 // TODO King Needs to count danger spots as invalid moves. --- This will be a pain.
 
 // **FOCUS ON THESE**
