@@ -432,17 +432,6 @@ void BoardReset()
 // Prints out the board and all of it's peice placement
 void PrintBoard_ncurse()
 {
-
-  // initscr();  /* Start curses mode 		          */
-  // refresh();  /* Print it on to the real screen  */
-  // getch();    /* Wait for user input             */
-  // endwin();   /* End curses mode		              */
-  // getstr()    /*class: Get strings               */
-
-  // TODO here -------- >
-  // right now the curses window prints but will move on before the user can see it
-  // that needs to be fixed
-
   // TODO move?
   initscr(); /* Start curses mode */
 
@@ -525,7 +514,7 @@ void PrintBoard_ncurse()
   endwin(); /* End curses mode */
 }
 
-/*checks for legal movments*/
+// checks for legal movments.
 void Movement(Position start, Position end)
 {
   if ((start.x != end.x) || (start.y != end.y))
@@ -708,6 +697,3 @@ int main()
   return 0;
 }
 #endif
-
-// ValidMove(Position start, Position end)
-// bool classptr->ValidMove(Position start, Position end) override
