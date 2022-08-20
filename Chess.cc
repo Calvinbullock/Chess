@@ -22,7 +22,8 @@
 
 // GOLABLE VARIABLES / MEATHODS
 using namespace std;
-void TurnInput_Ncurse();
+void TurnInput(); // Two functions call each other so this keeps the one in scope of the other
+bool DEBUG_MODE;
 string ERROR_MSG = "None";
 int TURN_NUM = 0;
 
@@ -571,7 +572,12 @@ void PrintBoard_ncurse()
   printw("  A   B   C   D   E   F   G   H  \n");
   printw("\n");
 
-  TurnInput_Ncurse();
+  // TODO this needs to be set better to wait for input
+  // TODO this needs to be set better to wait for input
+  // TODO this needs to be set better to wait for input
+  char *nameTemp = new char[160];
+  printw(nameTemp);
+  getstr(nameTemp);
 
   attroff(COLOR_PAIR(2));
   endwin(); /* End curses mode */
@@ -597,11 +603,12 @@ void Movement(Position start, Position end)
   return;
 }
 
-void TurnInput_Ncurse()
+// Takes input from the payer and parses it for other methods
 {
   Position start, end;
   // **TODO** make sure to check only 2 chars get entered per "cin" otherwise bad things happen
 
+  // this and the next while's will repeat the quesstions until you give an none empty (null) postion
   while (true)
   {
     printw("Type the start postion of your move: ");
