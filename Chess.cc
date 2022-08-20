@@ -508,7 +508,7 @@ void PrintBoard_ncurse()
     printw("Errors: %s\n", ERROR_MSG.c_str());
     attroff(COLOR_PAIR(3));
   }
-  ERROR_MSG = "None";
+  ERROR_MSG.clear();
 
   attroff(COLOR_PAIR(2));
   endwin(); /* End curses mode */
