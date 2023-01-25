@@ -173,9 +173,10 @@ public:
     for (int x = min(start.x, end.x) + 1; x < max(start.x, end.x); x++)
     {
       y++;
+      // TODO BUG here triggers for target space B5 with piece in A6.
       if (Board[x][y] == nullptr)
       {
-        ERROR_MSG = "Invalid Bishop move, piece in the way";
+        ERROR_MSG = "Invalid Bishop move, piece in the way 1";
         return false;
       }
     }
@@ -199,7 +200,7 @@ public:
       y++;
       if (Board[x][y] == nullptr)
       {
-        ERROR_MSG = "Invalid Bishop move, piece in the way";
+        ERROR_MSG = "Invalid Bishop move, piece in the way 2";
         return false;
       }
     }
