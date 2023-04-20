@@ -1,5 +1,5 @@
 /* Project Started March 2022 */
-// g++ Chess.cc && ./a.out --- use this to run it in Bash
+// g++ ChessTerm.cc && ./a.out --- use this to run it in Bash
 // WARNING TO SHOW DEBUGs COMEMNT OUT "system("clear");"
 
 // **FOR LATER**
