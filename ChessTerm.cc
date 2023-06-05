@@ -1,3 +1,5 @@
+// Check point for class disasembly
+
 /* Project Started March 2022 */
 // g++ ChessTerm.cc && ./a.out --- use this to run it in Bash
 // WARNING TO SHOW DEBUGs COMEMNT OUT "system("clear");"
